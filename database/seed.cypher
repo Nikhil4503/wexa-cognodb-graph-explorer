@@ -1,0 +1,13 @@
+CREATE CONSTRAINT candidate_name IF NOT EXISTS FOR (c:Candidate) REQUIRE c.name IS UNIQUE;
+CREATE CONSTRAINT skill_name IF NOT EXISTS FOR (s:Skill) REQUIRE s.name IS UNIQUE;
+CREATE CONSTRAINT company_name IF NOT EXISTS FOR (c:Company) REQUIRE c.name IS UNIQUE;
+CREATE CONSTRAINT project_name IF NOT EXISTS FOR (p:Project) REQUIRE p.name IS UNIQUE;
+MERGE (n:Candidate {name:'Nikhil Jadhav'}) SET n.location='Pune';
+MERGE (r:Candidate {name:'Rahul Patil'}) SET r.location='Mumbai';
+MERGE (p:Candidate {name:'Priya Sharma'}) SET p.location='Bengaluru';
+MERGE (d:Skill {name:'.NET'}); MERGE (a:Skill {name:'Angular'}); MERGE (az:Skill {name:'Azure'}); MERGE (sql:Skill {name:'SQL Server'}); MERGE (py:Skill {name:'Python'});
+MERGE (m:Company {name:'MRI Software'}); MERGE (c:Company {name:'Capita'}); MERGE (ac:Company {name:'Acme Cloud'});
+MERGE (b:Project {name:'Billing Modernization'}); MERGE (an:Project {name:'Analytics Platform'}); MERGE (cp:Project {name:'Customer Portal'});
+MERGE (n)-[:HAS_SKILL]->(d); MERGE (n)-[:HAS_SKILL]->(a); MERGE (n)-[:HAS_SKILL]->(az); MERGE (n)-[:HAS_SKILL]->(sql); MERGE (n)-[:WORKED_AT]->(m); MERGE (n)-[:WORKED_AT]->(c); MERGE (n)-[:WORKED_ON]->(b); MERGE (b)-[:USES_SKILL]->(d); MERGE (b)-[:USES_SKILL]->(az);
+MERGE (r)-[:HAS_SKILL]->(d); MERGE (r)-[:HAS_SKILL]->(sql); MERGE (r)-[:WORKED_AT]->(ac); MERGE (r)-[:WORKED_ON]->(an); MERGE (an)-[:USES_SKILL]->(py); MERGE (an)-[:USES_SKILL]->(az);
+MERGE (p)-[:HAS_SKILL]->(a); MERGE (p)-[:HAS_SKILL]->(py); MERGE (p)-[:WORKED_AT]->(ac); MERGE (p)-[:WORKED_ON]->(cp); MERGE (cp)-[:USES_SKILL]->(a);
