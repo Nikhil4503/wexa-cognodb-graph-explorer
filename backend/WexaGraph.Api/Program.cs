@@ -10,4 +10,4 @@ builder.Services.AddSingleton<IDriver>(_=>{
 });
 builder.Services.AddScoped<GraphService>();
 builder.Services.AddCors(o=>o.AddDefaultPolicy(p=>p.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
-var app=builder.Build(); app.UseCors(); app.UseSwagger(); app.UseSwaggerUI(); app.MapControllers(); app.Run();
+var app=builder.Build(); app.UseCors(); app.UseDefaultFiles(); app.UseStaticFiles(); app.UseSwagger(); app.UseSwaggerUI(); app.MapControllers(); app.MapFallbackToFile("index.html"); app.Run();
