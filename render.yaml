@@ -1,9 +1,9 @@
 services:
   - type: web
-    name: wexa-cognodb-api
+    name: wexa-cognodb-graph-explorer
     runtime: docker
-    dockerfilePath: ./backend/WexaGraph.Api/Dockerfile
-    dockerContext: ./backend/WexaGraph.Api
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
     plan: free
     envVars:
       - key: COGNODB_URI
@@ -12,10 +12,3 @@ services:
         sync: false
       - key: COGNODB_PASSWORD
         sync: false
-
-  - type: web
-    name: wexa-cognodb-frontend
-    runtime: static
-    rootDir: frontend
-    buildCommand: npm install && npm run build
-    staticPublishPath: dist/wexa/browser
